@@ -1,0 +1,17 @@
+name: Main - Testing
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Build docker images
+        run: docker-compose build
+      - name: Run tests
+        run: docker-compose run -e CI=true test
